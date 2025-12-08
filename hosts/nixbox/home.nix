@@ -9,7 +9,7 @@ in
 
 {
   imports = [
-    ./applications.nix
+    ../../modules/applications.nix
   ];
 
   home.username = "marie";
