@@ -39,6 +39,7 @@ in
    gcc
    fd
    lsd
+   wofi
    fastfetch
  ];
  programs = {
