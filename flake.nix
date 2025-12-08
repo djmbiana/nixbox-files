@@ -1,5 +1,5 @@
 {
-  description = "djm's nixbox";
+  description = "marie's nix configs";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.11";
@@ -29,21 +29,38 @@
           gnumake
         ];
       };
-    nixosConfigurations.nixbox = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./hosts/nixbox/configuration.nix
-        # home manager module
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.marie = import ./hosts/nixbox/home.nix;
-            backupFileExtension = "backup";
-          };
-        }
-      ];
-    };
+    nixosConfigurations = {
+        nixbox = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/nixbox/configuration.nix
+          # home manager module
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.marie = import ./hosts/nixbox/home.nix;
+              backupFileExtension = "backup";
+            };
+          }
+        ];
+      };
+        nixpad = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/nixpad/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.marie = import ./hosts/thinkpad/home.nix;
+              backupFileExtension = "backup";
+            };
+          }
+        ];
+      };
+    }; 
   };
 }
