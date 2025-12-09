@@ -7,14 +7,19 @@
     ];
 
   # Bootloader.
-  # boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 5;  # Set it here at boot.loader level
-  boot.loader.grub.enable = true;
-  boot.loader.grub.devices = [ "nodev" ];
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.useOSProber = true;
-  boot.loader.grub.configurationLimit = 100;
+  boot.loader = {
+  efi.canTouchEfiVariables = true;
+  timeout = 5;
+  
+  grub = {
+    enable = true;
+    devices = [ "nodev" ];  # Don't install to MBR
+    efiSupport = true;
+    efiInstallAsRemovable = false;  # Try setting this explicitly
+    useOSProber = true;
+    configurationLimit = 100;
+  };
+};
 
   networking.hostName = "nixbox"; # Define your hostname.
   networking.networkmanager.enable = true; # Enables networking
@@ -119,10 +124,11 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   programs.git = {
-    config ={
-      user.name = "Derrick Biana";
-      user.email = "djmbiana@gmail.com";
-      init.defaultBranch = "main";
+  enable = true;
+  config = {
+    user.name = "Derrick Biana";
+    user.email = "djmbiana@gmail.com";
+    init.defaultBranch = "main";
     };
   };
 
