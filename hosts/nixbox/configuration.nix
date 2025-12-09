@@ -15,7 +15,6 @@
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.useOSProber = true;
   boot.loader.grub.configurationLimit = 100;
-  boot.loader.grub.default = "saved";
 
   networking.hostName = "nixbox"; # Define your hostname.
   networking.networkmanager.enable = true; # Enables networking
