@@ -9,6 +9,7 @@
   # Bootloader.
   boot.loader = {
   efi.canTouchEfiVariables = true;
+  efi.efiSysMountPoint = "/boot";
   timeout = 5;
   
   grub = {
